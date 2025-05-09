@@ -190,13 +190,14 @@ label[for="DestHU-inner"] {
 }
 
   `;
-
+//Inject CSS file (separate file seems not working)
   function injectCSS() {
     const style = document.createElement('style');
     style.textContent = cssRules;
     document.head.appendChild(style);
   }
 
+//App selection -> control class -> css easier to modify
   function classifyApp() {
     const HUMan = document.querySelector('#application-ZEWM01-display-content');
     const HUFast = document.querySelector('#application-ZFEWM_HU_APP_N-display-content');
@@ -205,6 +206,7 @@ label[for="DestHU-inner"] {
     if (HUFast) document.body.classList.add('hufast');
   }
 
+//Hiding post change button and adding a control class to transfer, split and action buttons
   function labelButtons() {
     document.querySelectorAll('bdi').forEach((bdi) => {
       const label = bdi.textContent.trim().toUpperCase();
@@ -217,6 +219,7 @@ label[for="DestHU-inner"] {
     });
   }
 
+//set focus on DestHU field after 0.2s
   function focusDestHU() {
     setTimeout(() => {
       const destHU = document.querySelector('#DestHU-inner');
@@ -224,6 +227,7 @@ label[for="DestHU-inner"] {
     }, 200);
   }
 
+//Creating a div with both destHU and destBIN
   function showDestinationValues(db, hu) {
     let existing = document.getElementById('destValues');
     if (existing) {
@@ -265,6 +269,7 @@ label[for="DestHU-inner"] {
     attachSaveHandler();
   }
 
+//run all the functions once DOM is completely loaded, when url change (app change) and when something change in the DOM
   document.addEventListener('DOMContentLoaded', runAll);
   window.addEventListener('hashchange', () => setTimeout(runAll, 300));
 
